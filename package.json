@@ -1,0 +1,75 @@
+{
+  "name": "silent-perihelion",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build && electron-builder",
+    "preview": "vite preview"
+  },
+  "main": "dist-electron/main.js",
+  "dependencies": {
+    "@codemirror/lang-markdown": "^6.5.0",
+    "@codemirror/language": "^6.11.3",
+    "@codemirror/language-data": "^6.5.2",
+    "@codemirror/lint": "^6.9.2",
+    "@codemirror/state": "^6.5.2",
+    "@codemirror/theme-one-dark": "^6.1.3",
+    "@codemirror/view": "^6.39.4",
+    "@lezer/highlight": "^1.2.3",
+    "@phosphor-icons/vue": "^2.2.1",
+    "@tiptap/extension-placeholder": "^3.12.0",
+    "@tiptap/extension-task-item": "^3.12.1",
+    "@tiptap/extension-task-list": "^3.12.1",
+    "@tiptap/starter-kit": "^3.12.0",
+    "@tiptap/vue-3": "^3.12.0",
+    "@vuepic/vue-datepicker": "^12.0.5",
+    "better-sqlite3": "^12.5.0",
+    "codemirror": "^6.0.2",
+    "markdownlint": "^0.40.0",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.24",
+    "vue-router": "^4.6.3",
+    "vuedraggable": "^4.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.1.17",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/markdownlint": "^0.13.0",
+    "@types/node": "^24.10.1",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/tsconfig": "^0.8.1",
+    "autoprefixer": "^10.4.22",
+    "concurrently": "^9.2.1",
+    "electron": "^39.2.4",
+    "electron-builder": "^26.0.12",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4",
+    "vite-plugin-electron": "^0.29.0",
+    "vite-plugin-electron-renderer": "^0.14.6",
+    "vue-tsc": "^3.1.4"
+  },
+  "build": {
+    "appId": "com.silentperihelion.app",
+    "productName": "Silent Perihelion",
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false
+    }
+  }
+}

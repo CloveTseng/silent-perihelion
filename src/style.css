@@ -1,0 +1,89 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+:root {
+  font-family: 'Google Sans Code', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: #e3e3e0;
+  background-color: #2b2b2a; /* Morandi BG */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  @apply bg-gray-800 text-gray-100 text-sm;
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* VueDatePicker Overrides */
+:root {
+  /* General */
+  --dp-font-family: 'Google Sans Code', Inter, system-ui, sans-serif;
+  --dp-border-radius: 6px; 
+  --dp-cell-border-radius: 4px;
+
+  /* Light Mode (Default) */
+  --dp-background-color: #ffffff;
+  --dp-text-color: #374151; /* gray-700 */
+  --dp-hover-color: #f3f4f6; /* gray-100 */
+  --dp-hover-text-color: #374151;
+  --dp-hover-icon-color: #374151;
+  --dp-primary-color: #5e7a91; /* Morandi Blue */
+  --dp-primary-disabled-color: #9fb3c2;
+  --dp-primary-text-color: #ffffff;
+  --dp-secondary-color: #c0c4cc;
+  --dp-border-color: #e5e7eb; /* gray-200 */
+  --dp-menu-border-color: #e5e7eb;
+  --dp-border-color-hover: #5e7a91;
+  --dp-disabled-color: #f3f4f6;
+  --dp-scroll-bar-background: #f3f4f6;
+  --dp-scroll-bar-color: #9ca3af;
+  --dp-success-color: #8da399; /* Morandi Green */
+  --dp-success-color-disabled: #a3d9b1;
+  --dp-icon-color: #9ca3af; /* gray-400 */
+  --dp-danger-color: #c48a8a; /* Morandi Red */
+  --dp-marker-color: #c48a8a;
+  --dp-tooltip-color: #3e3e3c;
+}
+
+.dp__theme_dark {
+  --dp-background-color: #2b2b2a; /* gray-800 */
+  --dp-text-color: #e3e3e0; /* gray-100 */
+  --dp-hover-color: #3e3e3c; /* gray-700 */
+  --dp-hover-text-color: #ffffff;
+  --dp-hover-icon-color: #e3e3e0;
+  --dp-primary-color: #5e7a91; /* Morandi Blue */
+  --dp-primary-disabled-color: #4a6175;
+  --dp-primary-text-color: #ffffff;
+  --dp-secondary-color: #a8a8a5;
+  --dp-border-color: #3e3e3c; /* gray-700 */
+  --dp-menu-border-color: #3e3e3c;
+  --dp-border-color-hover: #5e7a91;
+  --dp-disabled-color: #1c1c1b;
+  --dp-scroll-bar-background: #1c1c1b;
+  --dp-scroll-bar-color: #545452;
+  --dp-success-color: #8da399;
+  --dp-success-color-disabled: #424e48;
+  --dp-icon-color: #8a8a87; /* gray-400 */
+  --dp-danger-color: #c48a8a;
+  --dp-marker-color: #c48a8a;
+  --dp-tooltip-color: #1c1c1b;
+}
