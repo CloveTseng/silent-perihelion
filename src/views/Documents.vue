@@ -165,6 +165,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import MarkdownEditor from '../components/MarkdownEditor.vue'
 import { useSettingsStore } from '../stores/settings'
 import { 
@@ -180,6 +181,7 @@ import { zhTW } from 'date-fns/locale'
 const zhTWLocale = zhTW
 import draggable from 'vuedraggable'
 
+const route = useRoute()
 const settingsStore = useSettingsStore()
 
 const icons = [
@@ -325,7 +327,20 @@ function debouncedSave() {
 
 onMounted(async () => {
   projects.value = await window.ipcRenderer.getProjects()
-  await loadContent()
+  
+  // Handle navigation from other views
+  if (route.query.type === 'project_note') {
+    currentType.value = 'project_note' // switch to project notes
+    if (route.query.projectId) {
+       const projectToSelect = projects.value.find(p => p.id === route.query.projectId)
+       if (projectToSelect) {
+         await selectProject(projectToSelect)
+       }
+    }
+  } else {
+    // Default behavior
+    await loadContent()
+  }
 })
 
 

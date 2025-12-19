@@ -5,7 +5,7 @@
       <div>
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
         <p class="text-gray-500 dark:text-gray-400 mt-1" v-if="cycle">
-          {{ cycle.title }} • Week {{ cycle.currentWeek }} of 12
+          {{ cycle.title }} • Week {{ cycle.currentWeek }} of 12 <span class="ml-2 text-gray-400 font-normal">{{ cycleDateRange }}</span>
         </p>
         <p class="text-gray-500 dark:text-gray-400 mt-1" v-else>
           No active cycle found.
@@ -167,6 +167,12 @@ const daysRemaining = computed(() => {
   const now = new Date()
   const diff = end.getTime() - now.getTime()
   return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)))
+})
+
+const cycleDateRange = computed(() => {
+  if (!cycle.value?.start_date || !cycle.value?.end_date) return ''
+  const formatDate = (d: string) => new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+  return `(${formatDate(cycle.value.start_date)} - ${formatDate(cycle.value.end_date)})`
 })
 
 onMounted(async () => {

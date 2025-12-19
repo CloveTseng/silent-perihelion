@@ -65,7 +65,16 @@
       <div class="w-2/3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex flex-col overflow-hidden" v-if="selectedProject">
         <div class="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
           <div>
-            <h2 class="text-xl font-bold text-gray-900 dark:text-white">{{ selectedProject.title }}</h2>
+            <div class="flex items-center gap-2">
+              <h2 class="text-xl font-bold text-gray-900 dark:text-white">{{ selectedProject.title }}</h2>
+              <button 
+                @click="goToProjectNote"
+                class="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
+                title="Open Project Note"
+              >
+                <PhNotebook weight="bold" class="w-5 h-5" />
+              </button>
+            </div>
             <p class="text-sm text-gray-500 dark:text-gray-400">Tactics Plan</p>
           </div>
           <button 
@@ -151,6 +160,9 @@
             <div class="flex items-center gap-4 mb-3">
               <div class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center font-bold text-gray-600 dark:text-gray-300 text-sm">
                 W{{ week }}
+              </div>
+              <div v-if="currentCycle" class="text-xs text-gray-400 dark:text-gray-600 font-medium whitespace-nowrap">
+                {{ getWeekRange(week) }}
               </div>
               <div class="h-px bg-gray-100 dark:bg-gray-700 flex-1"></div>
               <button 
@@ -388,6 +400,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import MarkdownEditor from '../components/MarkdownEditor.vue'
 import { 
   PhRocketLaunch, PhSneaker, PhCode, PhBook, PhBriefcase, PhHeart, PhStar, PhLightning,
@@ -395,12 +408,13 @@ import {
   PhGlobe, PhHouse, PhUsers, PhGraduationCap, PhAirplane, PhGameController,
   PhList, PhFlag, PhCalendarBlank,
   PhCoffee, PhDesktop, PhEnvelope, PhFolder, PhGear, PhGift, PhHeadphones, PhImage, PhKey, PhTrophy, PhTarget,
-  PhPencil
+  PhPencil, PhNotebook
 } from '@phosphor-icons/vue'
 import { zhTW } from 'date-fns/locale'
 const zhTWLocale = zhTW
 import { useSettingsStore } from '../stores/settings'
 const settingsStore = useSettingsStore()
+const router = useRouter()
 import draggable from 'vuedraggable'
 import { VueDatePicker } from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -409,6 +423,7 @@ const projects = ref<any[]>([])
 const selectedProject = ref<any>(null)
 const projectTasks = ref<any[]>([])
 const tasksByWeek = ref<Record<number, any[]>>({})
+const currentCycle = ref<any>(null)
 
 // Initialize tasksByWeek structure
 for (let i = 0; i <= 12; i++) {
@@ -493,6 +508,7 @@ function formatDate(date: Date) {
 
 onMounted(() => {
   loadProjects()
+  loadCycle()
   window.addEventListener('keydown', handleKeydown)
   window.addEventListener('click', closeContextMenu)
 })
@@ -531,6 +547,25 @@ function closeAddTask() {
   if (debounceTimer) clearTimeout(debounceTimer)
   showAddTask.value = false
   editingTaskId.value = null
+}
+
+async function loadCycle() {
+  const data = await window.ipcRenderer.getDashboardData()
+  if (data.cycle) {
+    currentCycle.value = data.cycle
+  }
+}
+
+function getWeekRange(weekNum: number) {
+  if (!currentCycle.value?.start_date) return ''
+  const start = new Date(currentCycle.value.start_date)
+  const weekStart = new Date(start)
+  weekStart.setDate(start.getDate() + (weekNum - 1) * 7)
+  
+  const weekEnd = new Date(weekStart)
+  weekEnd.setDate(weekStart.getDate() + 6)
+  
+  return `${formatDate(weekStart)} - ${formatDate(weekEnd)}`
 }
 
 async function loadProjects() {
@@ -599,6 +634,18 @@ async function deleteProject(id: string) {
   await window.ipcRenderer.deleteProject(id)
   selectedProject.value = null
   await loadProjects()
+}
+
+function goToProjectNote() {
+  if (selectedProject.value) {
+    router.push({ 
+      name: 'Documents', 
+      query: { 
+        type: 'project_note', 
+        projectId: selectedProject.value.id 
+      } 
+    })
+  }
 }
 
 function openAddTask(week: number) {
