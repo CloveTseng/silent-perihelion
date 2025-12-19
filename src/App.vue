@@ -61,7 +61,7 @@ import {
       </nav>
 
       <div class="p-4 border-t border-gray-100 dark:border-gray-700 relative flex justify-center items-center">
-        <span class="text-xs text-gray-400 dark:text-gray-500">v0.1.0 Alpha</span>
+        <span class="text-xs text-gray-400 dark:text-gray-500">v0.1.2</span>
         <router-link 
           to="/settings" 
           class="absolute right-4 text-gray-400 dark:text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
