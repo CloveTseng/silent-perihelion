@@ -36,6 +36,7 @@ jobs:
         run: npm run build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ELECTRON_BUILDER_ALLOW_HANDLE_APPLE_ID_WITHOUT_PASSWORD: true
 
       - name: Upload Artifacts to Release
         uses: softprops/action-gh-release@v1
