@@ -51,7 +51,7 @@
                   <PhPencil weight="bold" class="w-4 h-4" />
                 </button>
               </div>
-              <p class="text-sm text-gray-500 dark:text-gray-400 mt-2 line-clamp-2">{{ project.description }}</p>
+              <p v-if="project.description" class="text-sm text-gray-500 dark:text-gray-400 mt-2 line-clamp-2">{{ project.description }}</p>
             </div>
           </template>
         </draggable>
