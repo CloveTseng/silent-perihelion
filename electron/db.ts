@@ -119,10 +119,13 @@ export function initDB() {
     const projectId2 = crypto.randomUUID()
 
     // Create Cycle
+    const startDate = new Date('2026-01-04T00:00:00.000Z')
+    const endDate = new Date(startDate.getTime() + 84 * 24 * 60 * 60 * 1000) // 12 weeks
+
     db.prepare(`
       INSERT INTO cycles(id, title, start_date, end_date, status)
   VALUES(?, ?, ?, ?, ?)
-    `).run(cycleId, '2024 Q4', new Date().toISOString(), new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(), 'active')
+    `).run(cycleId, '2026 Q1', startDate.toISOString(), endDate.toISOString(), 'active')
 
     // Create Projects
     db.prepare(`

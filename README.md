@@ -1,3 +1,7 @@
+# 下載說明 
+- 右側 releases 選擇你的版本下載 (exe 或 dmg) 未經數位簽章
+- 不放心的可以下載免安裝版 (zip)
+
 # 12-Week Year App (Silent Perihelion)
 這是一個強大的桌面應用程式，旨在幫助您實踐「12 週計畫 (12-Week Year)」執行系統，採用現代網頁技術與 Electron 構建。
 

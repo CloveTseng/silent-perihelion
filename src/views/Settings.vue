@@ -169,7 +169,7 @@
             <input 
               v-model="newCycle.title"
               type="text"
-              placeholder="e.g., 2025 Q1"
+              placeholder="e.g., 2026 Q1"
               class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-indigo-500 focus:border-indigo-500 p-2.5"
             />
           </div>
@@ -269,8 +269,8 @@ async function updateCycle() {
 
 function openNewCycleModal() {
   newCycle.value = { 
-    title: `Cycle ${new Date().getFullYear()}`, 
-    startDate: new Date() 
+    title: '2026 Q1', 
+    startDate: new Date('2026-01-04') 
   }
   showNewCycleModal.value = true
 }
