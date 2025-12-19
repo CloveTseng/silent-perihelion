@@ -33,7 +33,7 @@ jobs:
         run: npm install
 
       - name: Build Electron App
-        run: npm run build
+        run: npm run build -- --publish never
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ELECTRON_BUILDER_ALLOW_HANDLE_APPLE_ID_WITHOUT_PASSWORD: true
