@@ -38,10 +38,14 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ELECTRON_BUILDER_ALLOW_HANDLE_APPLE_ID_WITHOUT_PASSWORD: true
 
+      - name: Extract Release Notes
+        run: node scripts/extract-changelog.js
+
       - name: Upload Artifacts to Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
+          body_path: release-notes.md
           files: |
             release/*.exe
             release/*.zip
