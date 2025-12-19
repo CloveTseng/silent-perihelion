@@ -74,12 +74,7 @@ import {
 
     <!-- Main Content -->
     <main class="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900 relative">
-      <!-- DEBUG INFO -->
-      <div class="bg-yellow-100 text-yellow-900 p-2 text-xs absolute top-0 right-0 z-50 opacity-75">
-        Path: {{ $route.fullPath }} <br/>
-        Matched: {{ $route.matched.length }} <br/>
-        Name: {{ $route.name }}
-      </div>
+
 
       <div v-if="!$route.matched.length" class="text-red-500 p-4">
         No route matched for: {{ $route.path }}

@@ -106,7 +106,7 @@
 
 
 <script setup lang="ts">
-import { ref, onMounted, computed, nextTick } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import MarkdownEditor from '../components/MarkdownEditor.vue'
 const selectedWeek = ref(1)
 const tasks = ref<any[]>([])
