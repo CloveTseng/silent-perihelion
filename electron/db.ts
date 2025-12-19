@@ -3,9 +3,7 @@ import path from 'node:path'
 import { app } from 'electron'
 import crypto from 'node:crypto'
 
-const dbPath = app.isPackaged
-  ? path.join(process.resourcesPath, '12week.db')
-  : path.join(app.getPath('userData'), '12week-dev.db')
+const dbPath = path.join(app.getPath('userData'), app.isPackaged ? '12week.db' : '12week-dev.db')
 
 const db = new Database(dbPath)
 db.pragma('journal_mode = WAL')
